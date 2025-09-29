@@ -20,29 +20,29 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # - name: Build and push client image
-      #   uses: docker/build-push-action@v5
-      #   with:
-      #     context: .
-      #     file: ./client/Dockerfile
-      #     push: true
-      #     tags: eslamnasser100/multi-client:latest
+      - name: Build and push client image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./client/Dockerfile
+          push: true
+          tags: eslamnasser100/multi-client:latest
 
-      # - name: Build and push server image
-      #   uses: docker/build-push-action@v5
-      #   with:
-      #     context: .
-      #     file: ./server/Dockerfile
-      #     push: true
-      #     tags: eslamnasser100/multi-server:latest
+      - name: Build and push server image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./server/Dockerfile
+          push: true
+          tags: eslamnasser100/multi-server:latest
 
-      # - name: Build and push worker image
-      #   uses: docker/build-push-action@v5
-      #   with:
-      #     context: .
-      #     file: ./worker/Dockerfile
-      #     push: true
-      #     tags: eslamnasser100/multi-worker:latest
+      - name: Build and push worker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./worker/Dockerfile
+          push: true
+          tags: eslamnasser100/multi-worker:latest
   
       - name: Build and push nginx image
         uses: docker/build-push-action@v5
