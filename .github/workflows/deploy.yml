@@ -2,7 +2,8 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ "master" ]
+    branches: 
+      - master
 
 jobs:
   build-and-push:
@@ -26,7 +27,7 @@ jobs:
           context: .
           file: ./client/Dockerfile
           push: true
-          tags: eslamnasser100/multi-client:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/multi-client:latest
 
       - name: Build and push server image
         uses: docker/build-push-action@v5
@@ -34,7 +35,7 @@ jobs:
           context: .
           file: ./server/Dockerfile
           push: true
-          tags: eslamnasser100/multi-server:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/multi-server:latest
 
       - name: Build and push worker image
         uses: docker/build-push-action@v5
@@ -42,7 +43,7 @@ jobs:
           context: .
           file: ./worker/Dockerfile
           push: true
-          tags: eslamnasser100/multi-worker:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/multi-worker:latest
   
       - name: Build and push nginx image
         uses: docker/build-push-action@v5
@@ -50,7 +51,7 @@ jobs:
           context: .
           file: ./nginx/Dockerfile
           push: true
-          tags: eslamnasser100/multi-nginx:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/multi-nginx:latest
   
   # deploy:
   #   runs-on: ubuntu-latest
