@@ -8,9 +8,9 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        service: [nginx, server, worker, client]
+    # strategy:
+    #   matrix:
+    #     service: [nginx, server, worker, client]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
