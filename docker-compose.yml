@@ -4,22 +4,21 @@ services:
     image: 'postgres:latest'
     environment:
       - POSTGRES_PASSWORD=postgres_password
+
   redis:
     image: 'redis:latest'
+
   nginx:
     depends_on:
       - api
       - client
     restart: always
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./nginx
+    image: 'ahmedgamil/multi-nginx'
     ports:
       - '3000:80'
+
   api:
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./server
+    image: 'ahmedgamil/multi-server'
     volumes:
       - /app/node_modules
       - ./server:/app
@@ -31,19 +30,17 @@ services:
       - PGDATABASE=postgres
       - PGPASSWORD=postgres_password
       - PGPORT=5432
+
   client:
+    image: 'ahmedgamil/multi-client'
     environment:
       - WDS_SOCKET_PORT=0
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./client
     volumes:
       - /app/node_modules
       - ./client:/app
+
   worker:
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./worker
+    image: 'ahmedgamil/multi-worker'
     volumes:
       - /app/node_modules
       - ./worker:/app
